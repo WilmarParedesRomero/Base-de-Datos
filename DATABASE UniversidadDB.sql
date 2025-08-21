@@ -11,7 +11,15 @@ CREATE TABLE Alumnos (
     AlumnoID INT IDENTITY(1,1) PRIMARY KEY,
     Nombre NVARCHAR(100) NOT NULL,
     Edad INT,
-    Ciclo NVARCHAR(50) -- Ejemplo: "1er Ciclo", "2do Ciclo"
+    Ciclo NVARCHAR(50) 
+);
+
+-- Tabla Profesores
+CREATE TABLE Profesores (
+    ProfesorID INT IDENTITY(1,1) PRIMARY KEY,
+    Nombre NVARCHAR(100) NOT NULL,
+    Especialidad NVARCHAR(100),
+    Email NVARCHAR(100)
 );
 
 -- Tabla Cursos
@@ -19,10 +27,11 @@ CREATE TABLE Cursos (
     CursoID INT IDENTITY(1,1) PRIMARY KEY,
     NombreCurso NVARCHAR(100) NOT NULL,
     Creditos INT NOT NULL,
-    Profesor NVARCHAR(100) -- En el futuro será otra tabla relacionada
+    ProfesorID INT,
+    FOREIGN KEY (ProfesorID) REFERENCES Profesores(ProfesorID)
 );
 
--- Tabla Notas
+-- Tabla Notas 
 CREATE TABLE Notas (
     NotaID INT IDENTITY(1,1) PRIMARY KEY,
     AlumnoID INT NOT NULL,
@@ -42,17 +51,27 @@ VALUES
 ('Luis Fernández', 22, '4to Ciclo'),
 ('Sofía Ramírez', 19, '2do Ciclo');
 
--- Insertar cursos
-INSERT INTO Cursos (NombreCurso, Creditos, Profesor)
+-- Insertar profesores
+INSERT INTO Profesores (Nombre, Especialidad, Email)
 VALUES
-('Matemáticas I', 4, 'Dr. Ramírez'),
-('Comunicación Oral', 3, 'Lic. Torres'),
-('Programación I', 5, 'Ing. Fernández'),
-('Física I', 4, 'Dr. Morales'),
-('Historia Universal', 3, 'Mg. Gutiérrez'),
-('Base de Datos', 5, 'Ing. Castillo');
+('Dr. Ramírez', 'Matemáticas', 'ramirez@uni.edu'),
+('Lic. Torres', 'Comunicación', 'torres@uni.edu'),
+('Ing. Fernández', 'Programación', 'fernandez@uni.edu'),
+('Dr. Morales', 'Física', 'morales@uni.edu'),
+('Mg. Gutiérrez', 'Historia', 'gutierrez@uni.edu'),
+('Ing. Castillo', 'Bases de Datos', 'castillo@uni.edu');
 
--- Insertar notas 
+-- Insertar cursos (con relación a profesores)
+INSERT INTO Cursos (NombreCurso, Creditos, ProfesorID)
+VALUES
+('Matemáticas I', 4, 1),
+('Comunicación Oral', 3, 2),
+('Programación I', 5, 3),
+('Física I', 4, 4),
+('Historia Universal', 3, 5),
+('Base de Datos', 5, 6);
+
+-- Insertar notas
 INSERT INTO Notas (AlumnoID, CursoID, Nota)
 VALUES
 -- Juan Pérez
@@ -84,4 +103,3 @@ VALUES
 (6, 1, 19.0),
 (6, 2, 18.0),
 (6, 5, 17.5);
-
