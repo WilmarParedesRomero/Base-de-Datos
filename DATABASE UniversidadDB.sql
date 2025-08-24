@@ -5,41 +5,40 @@ GO
 -- Usar la base de datos
 USE UniversidadDB;
 GO
-
--- Crear tabla Profesores
-CREATE TABLE Profesores (
-    ProfesorID INT PRIMARY KEY IDENTITY(1,1),
-    Nombre NVARCHAR(100) NOT NULL,
-    Especialidad NVARCHAR(100)
+    
+-- ===================================
+-- TABLAS
+-- ===================================
+    
+-- Tabla de Carreras
+CREATE TABLE Carreras (
+    CarreraID INT PRIMARY KEY IDENTITY(1,1),
+    NombreCarrera NVARCHAR(100) NOT NULL,
+    Facultad NVARCHAR(100)
 );
 
--- Crear tabla Cursos
-CREATE TABLE Cursos (
-    CursoID INT PRIMARY KEY IDENTITY(1,1),
-    NombreCurso NVARCHAR(100) NOT NULL,
-    Creditos INT NOT NULL,
-    ProfesorID INT,
-    FOREIGN KEY (ProfesorID) REFERENCES Profesores(ProfesorID)
-);
-
--- Crear tabla Alumnos
+-- Tabla de Alumnos
 CREATE TABLE Alumnos (
     AlumnoID INT PRIMARY KEY IDENTITY(1,1),
-    Nombre NVARCHAR(100) NOT NULL,
+    Nombre NVARCHAR(50) NOT NULL,
+    Apellido NVARCHAR(50) NOT NULL,
     Edad INT,
-    Ciclo NVARCHAR(50)
+    Universidad NVARCHAR(100),
+    CarreraID INT,
+    FOREIGN KEY (CarreraID) REFERENCES Carreras(CarreraID)
 );
 
--- Crear tabla Notas
-CREATE TABLE Notas (
-    NotaID INT PRIMARY KEY IDENTITY(1,1),
-    AlumnoID INT,
-    CursoID INT,
-    Nota DECIMAL(4,2),
-    FOREIGN KEY (AlumnoID) REFERENCES Alumnos(AlumnoID),
-    FOREIGN KEY (CursoID) REFERENCES Cursos(CursoID)
-);
+-- Tabla de Profesores
+CREATE TABLE Profesores (
+    ProfesorID INT PRIMARY KEY IDENTITY(1,1),
+    Nombre NVARCHAR(50) NOT NULL,
+    Apellido NVARCHAR(50) NOT NULL,
+    Especialida
 
+-- ===================================
+-- DATOS 
+-- ===================================
+    
 -- Insertar Profesores
 INSERT INTO Profesores (Nombre, Especialidad)
 VALUES
