@@ -86,3 +86,11 @@ VALUES
 (6, 6, 18.0), -- Lucía en Estadística I
 (7, 7, 11.0), -- Martín en Física II
 (8, 8, 19.0); -- Valeria en Historia Contemporánea
+
+-- Insertar datos en Carreras
+INSERT INTO Carreras (NombreCarrera, Facultad) VALUES
+('Ingeniería de Software', 'Ingeniería'),
+('Medicina', 'Ciencias de la Salud'),
+('Arquitectura', 'Ingeniería y Diseño'),
+('Contabilidad', 'Ciencias Económicas'),
+('Psicología', 'Ciencias Sociales');
