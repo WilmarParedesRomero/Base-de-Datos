@@ -94,3 +94,13 @@ INSERT INTO Carreras (NombreCarrera, Facultad) VALUES
 ('Arquitectura', 'Ingeniería y Diseño'),
 ('Contabilidad', 'Ciencias Económicas'),
 ('Psicología', 'Ciencias Sociales');
+('Derecho', 'Ciencias Jurídicas'),
+('Administración de Empresas', 'Ciencias Económicas'),
+('Ingeniería Civil', 'Ingeniería'),
+('Biología', 'Ciencias Naturales'),
+('Educación Primaria', 'Ciencias de la Educación'),
+('Enfermería', 'Ciencias de la Salud'),
+('Diseño Gráfico', 'Artes y Diseño'),
+('Física', 'Ciencias Exactas'),
+('Sociología', 'Ciencias Sociales'),
+('Periodismo', 'Ciencias de la Comunicación');
