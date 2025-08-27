@@ -34,7 +34,13 @@ CREATE TABLE Profesores (
     Nombre NVARCHAR(50) NOT NULL,
     Apellido NVARCHAR(50) NOT NULL,
     Especialida
-
+    
+-- Tabla de Aulas
+CREATE TABLE Aulas (
+    IdAula INT IDENTITY(1,1) PRIMARY KEY,
+    CodigoAula VARCHAR(10) NOT NULL,
+    Capacidad INT NOT NULL
+);
 -- ===================================
 -- DATOS 
 -- ===================================
@@ -104,3 +110,4 @@ INSERT INTO Carreras (NombreCarrera, Facultad) VALUES
 ('Física', 'Ciencias Exactas'),
 ('Sociología', 'Ciencias Sociales'),
 ('Periodismo', 'Ciencias de la Comunicación');
+
