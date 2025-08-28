@@ -2,6 +2,7 @@
 CREATE DATABASE UniversidadDB;
 GO
 
+    
 -- Usar la base de datos
 USE UniversidadDB;
 GO
@@ -110,4 +111,5 @@ INSERT INTO Carreras (NombreCarrera, Facultad) VALUES
 ('Física', 'Ciencias Exactas'),
 ('Sociología', 'Ciencias Sociales'),
 ('Periodismo', 'Ciencias de la Comunicación');
+
 
