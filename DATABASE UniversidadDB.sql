@@ -164,3 +164,15 @@ VALUES
 (6, 6, 2, '3er Ciclo', '2025-03-06'), -- Lucía en Estadística I (B202)
 (7, 7, 3, '2do Ciclo', '2025-03-07'), -- Martín en Física II (C303)
 (8, 8, 4, '5to Ciclo', '2025-03-08'); -- Valeria en Historia Contemporánea (D404)
+
+-- Mostrar todos los alumnos
+SELECT * FROM Alumnos;
+
+-- Mostrar todos los cursos
+SELECT * FROM Cursos;
+
+-- Mostrar todas las carreras
+SELECT * FROM Carreras;
+
+-- Mostrar todas las matrículas
+SELECT * FROM Matriculas;
