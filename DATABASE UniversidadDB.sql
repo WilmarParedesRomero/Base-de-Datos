@@ -5,7 +5,7 @@ GO
 -- Usar la base de datos
 USE UniversidadDB;
 GO
-
+ 
 -- ===================================
 -- TABLAS
 -- ===================================
@@ -176,3 +176,4 @@ SELECT * FROM Carreras;
 
 -- Mostrar todas las matrículas
 SELECT * FROM Matriculas;
+
