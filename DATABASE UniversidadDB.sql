@@ -177,3 +177,20 @@ SELECT * FROM Carreras;
 -- Mostrar todas las matrículas
 SELECT * FROM Matriculas;
 
+-- Alumnos de Ingeniería de Software
+SELECT a.Nombre, a.Apellido
+FROM Alumnos a
+JOIN Carreras c ON a.CarreraID = c.CarreraID
+WHERE c.NombreCarrera = 'Ingeniería de Software';
+
+-- Cursos con más de 4 créditos
+SELECT NombreCurso, Creditos
+FROM Cursos
+WHERE Creditos > 4;
+
+-- Alumnos mayores de 20 ordenados por edad
+SELECT Nombre, Apellido, Edad
+FROM Alumnos
+WHERE Edad > 20
+ORDER BY Edad DESC;
+
