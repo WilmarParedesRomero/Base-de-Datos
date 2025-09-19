@@ -3,7 +3,7 @@ CREATE DATABASE UniversidadDB;
 GO
  
 -- Usar la base de datos
-USE UniversidadDB;
+USE UniversidadDB; 
 GO
      
 -- ===================================
@@ -193,6 +193,7 @@ SELECT Nombre, Apellido, Edad
 FROM Alumnos
 WHERE Edad > 20
 ORDER BY Edad DESC;
+
 
 
 
