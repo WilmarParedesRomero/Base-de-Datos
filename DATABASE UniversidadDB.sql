@@ -5,7 +5,7 @@ GO
 -- Usar la base de datos
 USE UniversidadDB; 
 GO
-     
+      
 -- =================================== 
 -- TABLAS
 -- ===================================
@@ -193,6 +193,7 @@ SELECT Nombre, Apellido, Edad
 FROM Alumnos
 WHERE Edad > 20
 ORDER BY Edad DESC;
+
 
 
 
