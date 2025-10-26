@@ -1,7 +1,7 @@
 -- Crear la base de datos
 CREATE DATABASE UniversidadDB;
 GO
-    
+     
 -- Usar la base de datos
 USE UniversidadDB; 
 GO
@@ -337,4 +337,5 @@ RIGHT JOIN Cursos c
 --1	Álgebra Lineal	1	1
 --2	Programación I	2	2
 --9	Filosofía Moderna	NULL	NULL
+
 
