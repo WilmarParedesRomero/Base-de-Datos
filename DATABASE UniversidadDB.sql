@@ -340,9 +340,136 @@ RIGHT JOIN Cursos c
 
 
 
+SELECT 
+    SUM(Nota) AS SumaTotalNotas
+FROM Notas;
+
+--| SumaTotalNotas |
+ -------------- 
+-- 125.8          
+
+SELECT 
+    AVG(Nota) AS PromedioGeneral
+FROM Notas;
+
+--| PromedioGeneral |
+ --------------- 
+--| 15.72           |
+
+SELECT 
+    MAX(Nota) AS NotaMasAlta
+FROM Notas;
+
+--| NotaMasAlta |
+ ----------- 
+--| 19.00       |
+
+SELECT 
+    MIN(Nota) AS NotaMasBaja
+FROM Notas;
+
+--| NotaMasBaja |
+----------- 
+--| 11.00       |
+
+SELECT 
+    c.NombreCurso,
+    AVG(n.Nota) AS PromedioCurso
+FROM Notas n
+JOIN Matriculas m ON n.MatriculaID = m.MatriculaID
+JOIN Cursos c ON m.CursoID = c.CursoID
+GROUP BY c.NombreCurso;
+
+--| Curso                | PromedioCurso |
+--| -------------------- | ------------- |
+--| Álgebra Lineal       | 15.5          |
+--| Programación I       | 18.0          |
+--| Base de Datos I      | 14.0          |
+--| Literatura Universal | 16.8          |
+--| …                    | …             |
+
+SELECT 
+    a.AlumnoID,
+    a.Nombre,
+    a.Apellido
+FROM Alumnos a
+WHERE EXISTS (
+    SELECT 1
+    FROM Matriculas m
+    WHERE m.AlumnoID = a.AlumnoID
+);
+
+--| AlumnoID | Nombre | Apellido |
+--| -------- | ------ | -------- |
+--| 1        | Luis   | Torres   |
+--| 2        | Andrea | Gómez    |
+--| 3        | Pedro  | Ruiz     |
+--| …        | …      | …        |
+
+SELECT 
+    a.Nombre,
+    a.Apellido
+FROM Alumnos a
+WHERE EXISTS (
+    SELECT 1 
+    FROM Matriculas m
+    WHERE 
+        m.AlumnoID = a.AlumnoID
+        AND DAY(m.FechaMatricula) = 1
+);
+
+--| Nombre | Apellido |
+--| ------ | -------- |
+--| Luis   | Torres   |
 
 
+SELECT 
+    CONCAT(Nombre, ' ', Apellido) AS NombreCompleto,
+    Edad
+FROM Estudiantes;
 
+--| NombreCompleto | Edad |
+--| -------------- | ---- |
+--| Juan Pérez     | 19   |
+--| María Torres   | 21   |
 
+CREATE TABLE AuditoriaEstudiantes (
+    IdAuditoria INT IDENTITY PRIMARY KEY,
+    IdEstudiante INT,
+    FechaRegistro DATETIME,
+    TipoOperacion VARCHAR(20)
+);
 
+CREATE TRIGGER TRG_AfterInsert_Estudiantes
+ON Estudiantes
+AFTER INSERT
+AS
+BEGIN
+    INSERT INTO AuditoriaEstudiantes (IdEstudiante, FechaRegistro, TipoOperacion)
+    SELECT 
+        IdEstudiante, 
+        GETDATE(), 
+        'INSERT'
+    FROM inserted;
+END;
 
+CREATE TRIGGER TRG_InsteadOfDelete_Ciclos
+ON Ciclos
+INSTEAD OF DELETE
+AS
+BEGIN
+    -- Verificar si el ciclo que se intenta borrar tiene estudiantes
+    IF EXISTS (
+        SELECT 1
+        FROM Estudiantes e
+        INNER JOIN deleted d ON e.IdCiclo = d.IdCiclo
+    )
+    BEGIN
+        RAISERROR('No puedes eliminar un ciclo que tiene estudiantes asignados.', 16, 1);
+        RETURN; -- Evita que se elimine
+    END
+    
+    -- Si no hay estudiantes, entonces sí borra el ciclo
+    DELETE FROM Ciclos
+    WHERE IdCiclo IN (SELECT IdCiclo FROM deleted);
+END;
